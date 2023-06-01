@@ -1,0 +1,8 @@
+[package]
+name = "filter"
+version = "0.1"
+lean_version = "leanprover-community/lean:3.51.1"
+path = "src"
+
+[dependencies]
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "67237461d7cbf410706a6a06f4d40cbb594c32dc"}
