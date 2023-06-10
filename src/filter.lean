@@ -16,3 +16,12 @@ lemma filter.le_and_le_iff_generate_eq (f g : filter X):
 begin
   sorry
 end
+
+-- I will consider add this later after we define princpal filter.
+-- Here is one challenging puzzle:
+/-
+lemma eq_infi_principal (B : filter_basis α) : B.filter = ⨅ s : B.sets, 𝓟 s :=
+begin
+  sorry
+end
+-/
