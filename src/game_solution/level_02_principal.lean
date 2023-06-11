@@ -69,8 +69,24 @@ if and only if s = t.
 @[simp] lemma principal_eq_iff_eq {s t : set α} : 𝓟 s = 𝓟 t ↔ s = t :=
   by by simp only [le_antisymm_iff, le_principal_iff, mem_principal]; refl
 
+section order_filter
+
+/--
+Goal: Prove '𝓟 (univ : set α) = ⊤' and '𝓟 (∅ : set α) = ⊥'
+Before we go to these,
+we firstly want to consider how to define the top (⊤) and the bottom (⊥) of filters.
+i.e. the largest filter and the smallest filter
+Remark: 
+When we say that a filter F ≤ filter G , 
+it means that F is finer than or equal to G. i.e. ∀ U ∈ G → U ∈ F 
+Idea: 
+The smallest filter corresponds to the finest one, so it should contain every subset.
+Similarly, the largest filter should only contain the whole set.
+-/
+
+-- Let's verify these:
 instance : order_top (filter α) :=
-{ top    := { sets            := {s | ∀ x, x ∈ s},
+{ top    := { sets             := {s | ∀ x, x ∈ s},
               univ_sets        := λ x, mem_univ x,
               upward_closure   := λ x y hx hxy a, hxy (hx a),
               inter_sets       := λ x y hx hy a, mem_inter (hx _) (hy _) },
@@ -90,12 +106,7 @@ iff.rfl
 @[simp] lemma mem_top {s : set α} : s ∈ (⊤ : filter α) ↔ s = univ :=
 by rw [mem_top_iff_forall, eq_univ_iff_forall]
 
-@[simp] lemma principal_univ : 𝓟 (univ : set α) = ⊤ :=
-begin
-  apply top_unique,
-  simp only [le_principal_iff, mem_top, eq_self_iff_true],
-end
-
+-- Hint: consider the magic of 'simp'
 instance : order_bot (filter α) :=
 { bot := { sets             := univ,
            univ_sets        := by simp only [mem_univ],
@@ -107,6 +118,16 @@ instance : order_bot (filter α) :=
     exact mem_univ u,
   end }
 
+end order_filter
+
+-- Hint: 'top_unique' is a good start.
+@[simp] lemma principal_univ : 𝓟 (univ : set α) = ⊤ :=
+begin
+  apply top_unique,
+  simp only [le_principal_iff, mem_top, eq_self_iff_true],
+end
+
+-- Hint: can you guass this hint using the above hint?
 @[simp] lemma principal_empty : 𝓟 (∅ : set α) = ⊥ :=
 begin
   apply bot_unique,
