@@ -5,7 +5,7 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
-import game_solution.level_01_basis
+import game_solution.level_02_order
 
 /-!
 # Principal filters
@@ -61,7 +61,6 @@ if and only if s ⊆ t.
 lemma principal_mono {s t : set α} : 𝓟 s ≤ 𝓟 t ↔ s ⊆ t :=
   by simp only [le_principal_iff, mem_principal, imp_self]
 
-
 /--
 The principal filter of s is equal to the principal filter of t 
 if and only if s = t.
@@ -72,13 +71,13 @@ if and only if s = t.
 section order_filter
 
 /--
-Goal: Prove '𝓟 (univ : set α) = ⊤' and '𝓟 (∅ : set α) = ⊥'
+Next, our goal: Prove '𝓟 (univ : set α) = ⊤' and '𝓟 (∅ : set α) = ⊥'
 Before we go to these,
 we firstly want to consider how to define the top (⊤) and the bottom (⊥) of filters.
 i.e. the largest filter and the smallest filter
 Remark: 
 When we say that a filter F ≤ filter G , 
-it means that F is finer than or equal to G. i.e. ∀ U ∈ G → U ∈ F 
+it means that F is finer than  G. i.e. ∀ U ∈ G → U ∈ F 
 Idea: 
 The smallest filter corresponds to the finest one, so it should contain every subset.
 Similarly, the largest filter should only contain the whole set.
@@ -127,7 +126,7 @@ begin
   simp only [le_principal_iff, mem_top, eq_self_iff_true],
 end
 
--- Hint: can you guass this hint using the above hint?
+-- Hint: can you guess this hint using the above hint?
 @[simp] lemma principal_empty : 𝓟 (∅ : set α) = ⊥ :=
 begin
   apply bot_unique,
