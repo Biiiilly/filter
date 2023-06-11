@@ -8,7 +8,7 @@ Thanks: Kevin Buzzard
 import game_solution.level_00_basic
 
 /-!
-# Filters
+# Filter basis
 
 We define the filter basis in this file.
 
