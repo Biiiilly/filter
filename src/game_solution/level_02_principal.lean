@@ -10,20 +10,21 @@ import game_solution.level_01_basis
 /-!
 # Principal filters
 
-
+We define the principal filters in this file.
 
 # Main Definitions
 
-
+`principal` : the principal filers
 
 -/
 
 open set
 
-variables {α : Type*}
+variables {α : Type*} {s : set α}
 
 namespace filter
 
+-- Firstly, let's define the principal filters:
 /-- The principal filter of `s` is the collection of all supersets of `s`. -/
 def principal (s : set α) : filter α :=
 { sets             := {t | s ⊆ t},
@@ -31,12 +32,18 @@ def principal (s : set α) : filter α :=
   upward_closure   := λ x y hx, subset.trans hx,
   inter_sets       := λ x y, subset_inter }
 
+-- We denote the principal filters as '𝓟' for convenience:
 notation `𝓟` := filter.principal
+
+#check 𝓟 s -- represents the principal filter of s
 
 @[simp] lemma mem_principal {s t : set α} : s ∈ 𝓟 t ↔ t ⊆ s := iff.rfl
 
 lemma mem_principal_self (s : set α) : s ∈ 𝓟 s := subset.rfl
 
+/--
+A filter f is finer than the principal filter of s if and only if s ∈ f.
+-/
 lemma le_principal_iff {s : set α} {f : filter α} : f ≤ 𝓟 s ↔ s ∈ f :=
 begin
   split,
@@ -47,9 +54,18 @@ begin
     exact mem_of_superset h hu }
 end
 
+/--
+The principal filter of s is finer than the principal filter of t 
+if and only if s ⊆ t.
+-/
 lemma principal_mono {s t : set α} : 𝓟 s ≤ 𝓟 t ↔ s ⊆ t :=
   by simp only [le_principal_iff, mem_principal, imp_self]
 
+
+/--
+The principal filter of s is equal to the principal filter of t 
+if and only if s = t.
+-/
 @[simp] lemma principal_eq_iff_eq {s t : set α} : 𝓟 s = 𝓟 t ↔ s = t :=
   by by simp only [le_antisymm_iff, le_principal_iff, mem_principal]; refl
 
@@ -79,12 +95,6 @@ begin
   apply top_unique,
   simp only [le_principal_iff, mem_top, eq_self_iff_true],
 end
-
-instance : has_bot (filter α) :=
-⟨{ sets            := univ,
-  univ_sets        := by simp only [mem_univ],
-  upward_closure   := by simp only [mem_univ, implies_true_iff, forall_const],
-  inter_sets       := by simp only [mem_univ, forall_const]}⟩
 
 instance : order_bot (filter α) :=
 { bot := { sets             := univ,

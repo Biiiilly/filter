@@ -5,7 +5,7 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
-import game_solution.level_01_principal
+import game_solution.level_02_principal
 
 
 /-!
