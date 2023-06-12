@@ -16,7 +16,7 @@ that's perfect!
 You can open the terminal and insert:
 
 ```
-leanproject get ImperialCollegeLondon/complex-number-game
+leanproject get Biiiilly/filter
 ```
 Then, you can open the folder where it's installed and start the game!
 
