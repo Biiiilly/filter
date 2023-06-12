@@ -6,6 +6,7 @@ Thanks: Kevin Buzzard
 -/
 
 import game_solution.level_03_principal
+import game_solution.level_05_challenges
 
 /-!
 # ultrafilters
@@ -18,7 +19,7 @@ We define the ultrafilters in this file.
 
 -/
 
-open set
+open set function
 
 variable {α : Type*}
 
@@ -49,19 +50,64 @@ end
 
 @[simp, norm_cast] lemma mem_coe : s ∈ (f : filter α) ↔ s ∈ f := iff.rfl
 
+lemma coe_injective : injective (coe : ultrafilter α → filter α)
+| ⟨f, h₁, h₂⟩ ⟨g, h₃, h₄⟩ rfl := by congr
+
+lemma eq_of_le {f g : ultrafilter α} (h : (f : filter α) ≤ g) : f = g :=
+coe_injective (g.unique h f.ne_bot')
+
+@[simp, norm_cast] lemma coe_le_coe {f g : ultrafilter α} : (f : filter α) ≤ g ↔ f = g :=
+⟨λ h, eq_of_le h, λ h, h ▸ le_rfl⟩
+
+@[simp, norm_cast] lemma coe_inj : (f : filter α) = g ↔ f = g := coe_injective.eq_iff
+
+@[ext] lemma ext ⦃f g : ultrafilter α⦄ (h : ∀ s, s ∈ f ↔ s ∈ g) : f = g :=
+coe_injective $ filter.ext h
+
+lemma le_of_inf_ne_bot (f : ultrafilter α) {g : filter α} (hg : (↑f ⊓ g) ≠ ⊥) : 
+  ↑f ≤ g :=
+begin
+  apply @le_of_inf_eq (filter α) _,
+  apply unique f _ hg,
+  exact inf_le_left,
+end
+
+lemma le_of_inf_ne_bot' (f : ultrafilter α) {g : filter α} (hg : (g ⊓ f) ≠ ⊥) : 
+  ↑f ≤ g := f.le_of_inf_ne_bot $ by rwa inf_comm
+
+lemma inf_ne_bot_iff {f : ultrafilter α} {g : filter α} : 
+  (↑f ⊓ g) ≠ ⊥ ↔ ↑f ≤ g :=
+begin
+  split,
+  { exact le_of_inf_ne_bot _ },
+  { intro h,
+    rw inf_of_le_left h,
+    exact f.ne_bot' }
+end
 
 @[simp] lemma compl_not_mem_iff : sᶜ ∉ f ↔ s ∈ f :=
 begin
-  sorry
+  split,
+  { intro h,
+    rw ← mem_coe,
+    rw ← filter.le_principal_iff,
+    apply le_of_inf_ne_bot,
+    intro h₁,
+    rw ← filter.empty_mem_iff_bot at h₁,
+    rw filter.mem_inf_principal at h₁,
+    simp only [mem_empty_iff_false, mem_coe] at h₁,
+    suffices : {x : α | x ∈ s → false} = sᶜ,
+    { rw this at h₁,
+      contradiction },
+    ext,
+    simp only [mem_set_of_eq],
+    refl },
+  { intro h,
+    exact filter.compl_not_mem f.ne_bot' h }
 end
 
 lemma compl_mem_iff_not_mem : sᶜ ∈ f ↔ s ∉ f := 
   by rw [← compl_not_mem_iff, compl_compl]
-
-lemma diff_mem_iff (f : ultrafilter α) : s \ t ∈ f ↔ s ∈ f ∧ t ∉ f :=
-begin
-  sorry
-end
 
 /-- If `sᶜ ∉ f ↔ s ∈ f`, then `f` is an ultrafilter. The other implication is given by
 `ultrafilter.compl_not_mem_iff`.  -/

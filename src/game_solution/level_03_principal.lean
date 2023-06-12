@@ -119,6 +119,22 @@ instance : order_bot (filter α) :=
 
 end order_filter
 
+@[simp] lemma mem_bot {s : set α} : s ∈ (⊥ : filter α) :=
+trivial
+
+lemma empty_mem_iff_bot {f : filter α} : ∅ ∈ f ↔ f = ⊥ :=
+begin
+  split,
+  { intro h,
+    apply bot_unique,
+    intros u hu,
+    suffices : ∅ ⊆ u,
+    { exact mem_of_superset h this },
+    exact empty_subset u },
+  { intro h,
+    exact mem_of_eq_of_mem (congr_arg sets h) trivial }
+end
+
 -- Hint: 'top_unique' is a good start.
 @[simp] lemma principal_univ : 𝓟 (univ : set α) = ⊤ :=
 begin
