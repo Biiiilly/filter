@@ -22,14 +22,14 @@ Then, you can open the folder where it's installed and start the game!
 
 # Instruction
 
-There are seven levels in this game:
-'level_00_basic'       : This level contains basic contents of filters. There is no puzzle in this level.
-'level_01_basis'       : We introduce the filter basis and discuss relevant properties of it in this level.
-'level_02_order'       : Given two filters (or filter basis) F and G, we talk about how to define F ≤ G in this level.
-'level_03_principal'   : This level discusses the principal filters and relevant properties.
-'level_04_ultrafilters': This level discusses the ultrafilters which is the minimal (maximal in the set order) proper filterand relevant properties.
-'level_05_topology'    : One of the applications of filters is about topology, and we will go through some of them in this level.
-'level_06_challenges'  : This level contains some challenging puzzles.
+There are seven levels in this game: \\
+'level_00_basic'       : This level contains basic contents of filters. There is no puzzle in this level. \\
+'level_01_basis'       : We introduce the filter basis and discuss relevant properties of it in this level. \\
+'level_02_order'       : Given two filters (or filter basis) F and G, we talk about how to define F ≤ G in this level. \\
+'level_03_principal'   : This level discusses the principal filters and relevant properties. \\
+'level_04_ultrafilters': This level discusses the ultrafilters which is the minimal (maximal in the set order) proper filterand relevant properties. \\
+'level_05_topology'    : One of the applications of filters is about topology, and we will go through some of them in this level. \\
+'level_06_challenges'  : This level contains some challenging puzzles. \\
 
 It's recommended to start with level 0, then go to level 1...
 
