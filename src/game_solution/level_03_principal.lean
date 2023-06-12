@@ -14,7 +14,7 @@ We define the principal filters in this file.
 
 # Main Definitions
 
-`principal` : the principal filers
+`principal` : The principal filter of `s` is the collection of all supersets of `s`.
 
 -/
 
@@ -41,9 +41,7 @@ notation `𝓟` := filter.principal
 
 lemma mem_principal_self (s : set α) : s ∈ 𝓟 s := subset.rfl
 
-/--
-A filter f is finer than the principal filter of s if and only if s ∈ f.
--/
+/-- A filter f is finer than the principal filter of s if and only if s ∈ f. -/
 lemma le_principal_iff {s : set α} {f : filter α} : f ≤ 𝓟 s ↔ s ∈ f :=
 begin
   split,
@@ -54,17 +52,13 @@ begin
     exact mem_of_superset h hu }
 end
 
-/--
-The principal filter of s is finer than the principal filter of t 
-if and only if s ⊆ t.
--/
+/-- The principal filter of s is finer than the principal filter of t 
+if and only if s ⊆ t. -/
 lemma principal_mono {s t : set α} : 𝓟 s ≤ 𝓟 t ↔ s ⊆ t :=
   by simp only [le_principal_iff, mem_principal, imp_self]
 
-/--
-The principal filter of s is equal to the principal filter of t 
-if and only if s = t.
--/
+/-- The principal filter of s is equal to the principal filter of t 
+if and only if s = t. -/
 @[simp] lemma principal_eq_iff_eq {s t : set α} : 𝓟 s = 𝓟 t ↔ s = t :=
   by by simp only [le_antisymm_iff, le_principal_iff, mem_principal]; refl
 
@@ -76,8 +70,8 @@ Before we go to these,
 we firstly want to consider how to define the top (⊤) and the bottom (⊥) of filters.
 i.e. the largest filter and the smallest filter
 Remark: 
-When we say that a filter F ≤ filter G , 
-it means that F is finer than  G. i.e. ∀ U ∈ G → U ∈ F 
+When we say that a filter f ≤ filter g , 
+it means that g ⊆ f. i.e. ∀ s ∈ g → s ∈ f
 Idea: 
 The smallest filter corresponds to the finest one, so it should contain every subset.
 Similarly, the largest filter should only contain the whole set.

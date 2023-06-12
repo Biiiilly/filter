@@ -11,7 +11,7 @@ import game_solution.level_03_principal
 /-!
 # Challenging Puzzles
 
-This file contains some challenging puzzles. Notice that some of the lemmas or theorems
+This level contains some challenging puzzles. Notice that some of the lemmas or theorems
 below are used in the previous levels.
 
 -/

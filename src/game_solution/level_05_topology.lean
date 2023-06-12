@@ -24,7 +24,7 @@ basically from mathlib. Notice there is nothing to do in this section -/
 section topology_review
 
 universe u
-variables {α : Type u} {a : α} {s s₁ s₂ t : set α} {p p₁ p₂ : α → Prop}
+variables {α : Type u} {a : α} {s s₁ s₂ : set α}
 
 /-- A topology on `α`. -/
 @[protect_proj] class topological_space (α : Type u) :=
@@ -91,17 +91,15 @@ def nhds (a : α) : filter α :=
       exact inter_subset_right x y }
   end }
 
-notation `𝓝` a := nhds a
+notation `𝓝` := nhds
 
 #check 𝓝 a
 
 @[simp] lemma mem_nhds {s : set α} : s ∈ (𝓝 a) ↔ (∃ t ⊆ s, is_open t ∧ a ∈ t) := iff.rfl
 
 -- Try these exercises below:
-/-- 
-To show a filter is above the neighborhood filter at `a`, it suffices to show that 
-it is above the principal filter of some open set `s` containing `a`. 
--/
+/-- To show a filter is above the neighborhood filter at `a`, it suffices to show that 
+it is above the principal filter of some open set `s` containing `a`. -/
 lemma nhds_le_of_le {f a} {s : set α} (h : a ∈ s) (ho : is_open s) (hsf : 𝓟 s ≤ f) : 
   (𝓝 a) ≤ f :=
 begin

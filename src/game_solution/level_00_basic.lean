@@ -11,11 +11,13 @@ import order.copy
 # Filters
 
 We define the filters and some basic properties of the filters in this file.
-Notice: there is no puzzle in this file.
+Notice: there is no puzzle in this file, and please read the instruction before
+starting playing game.
 
 # Main Definitions
 
-`filter` : the filter
+`filter` : A filter is a collection of subsets which contains the whole set, upward closed
+and closed under intersection.
 
 -/
 
@@ -31,14 +33,14 @@ structure filter (α : Type*) :=
 (inter_sets {F₁ F₂}       : F₁ ∈ sets → F₂ ∈ sets → F₁ ∩ F₂ ∈ sets)
 
 namespace filter
--- f and g are two filters, and s t are two subsets. 
+
+-- Say f and g are two filters, and s t are two subsets of α. 
 variables {α : Type*} {f g : filter α} {s t : set α}
 
--- A filter F is a collection of subsets, 
--- so clearly we want to do something like f ∈ F. 
-instance {α : Type*} : has_mem (set α) (filter α) := ⟨λ U F, U ∈ F.sets⟩
+-- A filter f is a collection of subsets, 
+-- so clearly we want to do something like (s : set α) ∈ (f : filter α). 
+instance : has_mem (set α) (filter α) := ⟨λ U F, U ∈ F.sets⟩
 
--- Now let's have some simple lemmas:
 @[simp] lemma mem_sets : s ∈ f.sets ↔ s ∈ f := iff.rfl
 
 lemma filter_eq : ∀ {f g : filter α}, f.sets = g.sets → f = g
@@ -55,7 +57,7 @@ by simp only [filter_eq_iff, ext_iff, filter.mem_sets]
 lemma ext : (∀ s, s ∈ f ↔ s ∈ g) → f = g :=
 filter.ext_iff.2
 
--- The following three lemmas are just from the definiton of the filters:
+-- The following three lemmas are directlyfrom the definiton of the filters:
 @[simp] lemma univ_mem : univ ∈ f :=
 f.univ_sets
 
