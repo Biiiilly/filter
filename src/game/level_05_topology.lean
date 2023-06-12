@@ -5,7 +5,7 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
-import game_solution.level_04_ultrafilters
+import game.level_04_ultrafilters
 
 
 /-!
@@ -66,28 +66,15 @@ def nhds (a : α) : filter α :=
 { sets := {s : set α | ∃ t ⊆ s, is_open t ∧ a ∈ t},
   univ_sets := 
   begin
-    simp only [exists_prop, mem_set_of_eq, subset_univ, true_and],
-    refine ⟨univ, topological_space.is_open_univ, mem_univ a⟩ 
+    sorry
   end,
   upward_closure :=
   begin
-    intros u v hu huv,
-    simp only [exists_prop, mem_set_of_eq] at hu ⊢,
-    obtain ⟨t, ht₁, ht₂, ht₃⟩ := hu,
-    refine ⟨t, subset_trans ht₁ huv, ht₂, ht₃⟩ 
+    sorry
   end,
   inter_sets :=
   begin
-    intros u v hu hv,
-    simp only [exists_prop, mem_set_of_eq, subset_inter_iff] at hu hv ⊢,
-    obtain ⟨x, hx₁, hx₂, hx₃⟩ := hu,
-    obtain ⟨y, hy₁, hy₂, hy₃⟩ := hv,
-    refine ⟨x ∩ y, _, is_open.inter hx₂ hy₂, mem_sep hx₃ hy₃⟩, 
-    split,
-    { apply subset_trans _ hx₁,
-      exact inter_subset_left x y },
-    { apply subset_trans _ hy₁,
-      exact inter_subset_right x y }
+    sorry
   end }
 
 notation `𝓝` := nhds
@@ -102,32 +89,22 @@ it is above the principal filter of some open set `s` containing `a`. -/
 lemma nhds_le_of_le {f a} {s : set α} (h : a ∈ s) (ho : is_open s) (hsf : 𝓟 s ≤ f) : 
   (𝓝 a) ≤ f :=
 begin
-  intros u hu,
-  rw mem_nhds,
-  specialize hsf hu,
-  rw filter.mem_principal at hsf,
-  refine ⟨s, hsf, ho, h⟩
+  sorry
 end
 
 lemma mem_of_mem_nhds {a : α} {s : set α} : s ∈ (𝓝 a) → a ∈ s :=
 begin
-  intro hs,
-  rw mem_nhds at hs,
-  obtain ⟨u, hu₁, hu₂, hu₃⟩ := hs,
-  exact hu₁ hu₃
+  sorry
 end
 
 lemma is_open.mem_nhds {a : α} {s : set α} (hs : is_open s) (ha : a ∈ s) :
   s ∈ 𝓝 a :=
 begin
-  rw mem_nhds,
-  refine ⟨s, rfl.subset, hs, ha⟩
+  sorry
 end
 
 -- Using results above, we can get this:
 lemma is_open.mem_nhds_iff {a : α} {s : set α} (hs : is_open s) : s ∈ (𝓝 a) ↔ a ∈ s :=
 begin
-  split,
-  { exact mem_of_mem_nhds },
-  { exact is_open.mem_nhds hs }
+  sorry
 end

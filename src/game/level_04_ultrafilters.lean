@@ -5,8 +5,8 @@ Authors: Jiale Miao, Yichen Feng, Lily Frost, Archie Prime
 Thanks: Kevin Buzzard
 -/
 
-import game_solution.level_03_principal
-import game_solution.level_06_challenges
+import game.level_03_principal
+import game.level_06_challenges
 
 /-!
 # ultrafilters
@@ -46,8 +46,7 @@ since an ultrafilter is a minimal proper filter. -/
 lemma unique (f : ultrafilter α) {g : filter α} (h : g ≤ f)
   (hne : g ≠ ⊥) : g = f :=
 begin
-  apply le_antisymm h,
-  exact f.le_of_le g hne h,
+  sorry
 end
 
 /-- We provide some basic APIs below.
@@ -86,9 +85,7 @@ it there. Again, you can directly use these lemmas for now, and do them in the l
 lemma le_of_inf_ne_bot (f : ultrafilter α) {g : filter α} (hg : (↑f ⊓ g) ≠ ⊥) : 
   ↑f ≤ g :=
 begin
-  apply @le_of_inf_eq (filter α) _,
-  apply unique f _ hg,
-  exact inf_le_left,
+  sorry
 end
 
 /-- Now coming to our main goal:
@@ -105,36 +102,27 @@ you can directly use them for now, and do them in the next level.
 -/
 @[simp] lemma compl_not_mem_iff : sᶜ ∉ f ↔ s ∈ f :=
 begin
-  split,
-  { intro h,
-    rw ← mem_coe,
-    rw ← filter.le_principal_iff,
-    apply le_of_inf_ne_bot,
-    intro h₁,
-    rw ← filter.empty_mem_iff_bot at h₁,
-    rw filter.mem_inf_principal at h₁,
-    simp only [mem_empty_iff_false, mem_coe] at h₁,
-    suffices : {x : α | x ∈ s → false} = sᶜ,
-    { rw this at h₁,
-      contradiction },
-    ext,
-    simp only [mem_set_of_eq],
-    refl },
-  { intro h,
-    exact filter.compl_not_mem f.ne_bot' h }
+  sorry
 end
 
 -- This result is directly from previous one.
 lemma compl_mem_iff_not_mem : sᶜ ∈ f ↔ s ∉ f := 
-  by rw [← compl_not_mem_iff, compl_compl]
+begin
+  sorry
+end
 
 -- Hint: 'filter.compl_not_mem' might be helpful.
 /-- If `sᶜ ∉ f ↔ s ∈ f`, then `f` is an ultrafilter. The other implication is given by
 `ultrafilter.compl_not_mem_iff`.  -/
 def of_compl_not_mem_iff (f : filter α) (h : ∀ s, sᶜ ∉ f ↔ s ∈ f) : ultrafilter α :=
 { to_filter := f,
-  ne_bot'   := λ hf, by simpa [hf] using h,
-  le_of_le  := λ g hg hgf s hs, (h s).1 $ λ hsc, 
-                by exact filter.compl_not_mem hg hs (hgf hsc) }
+  ne_bot'   := 
+  begin
+    sorry
+  end,
+  le_of_le  := 
+  begin
+    sorry
+  end }
 
 end ultrafilter
